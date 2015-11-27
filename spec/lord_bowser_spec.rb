@@ -22,29 +22,34 @@ describe LordBowser do
     specify { browser.is?('firefox >= 5').should be_true }
     specify { browser.is?('firefox >= 5', 'ie > 6').should be_true }
     specify { browser.is_not?('ie < 8').should be_true }
+    specify { browser.should_not be_mobile }
   end
 
   when_user_agent "Mozilla/5.0 (Windows NT 6.2; WOW64; rv:5.0) Gecko/20100101 Firefox/5.0" do
     specify { browser.vendor.should == :firefox }
     specify { browser.version.should == 5 }
     specify { browser.is_not?('ie < 8', 'firefox > 6').should be_true }
+    specify { browser.should_not be_mobile }
   end
 
   when_user_agent "Mozilla/5.0 (Windows NT 6.1; WOW64; rv:2.0b8pre) Gecko/20101114 Firefox/4.0b8pre" do
     specify { browser.vendor.should == :firefox }
     specify { browser.version.should == 4.0 }
+    specify { browser.should_not be_mobile }
   end
 
   when_user_agent "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_7_2) AppleWebKit/535.1 (KHTML, like Gecko) Chrome/14.0.835.186 Safari/535.1" do
     specify { browser.vendor.should == :chrome }
     specify { browser.version.should == 14 }
     specify { browser.is_not?('ie < 8', 'firefox < 6').should be_true }
+    specify { browser.should_not be_mobile }
   end
 
   when_user_agent "Mozilla/5.0 (Windows; U; MSIE 9.0; Windows NT 9.0; en-US)" do
     specify { browser.vendor.should == :ie }
     specify { browser.version.should == 9 }
     specify { browser.is?('firefox >= 5').should be_false }
+    specify { browser.should_not be_mobile }
   end
 
   when_user_agent "Mozilla/5.0 (Windows; U; MSIE 6.0; Windows NT 5.1; SV1; .NET CLR 2.0.50727)" do
@@ -53,21 +58,29 @@ describe LordBowser do
     specify { browser.is?('chrome').should be_false }
     specify { browser.is_not?('chrome > 8').should be_true }
     specify { browser.is_not?('ie < 8', 'firefox < 6').should be_false }
+    specify { browser.should_not be_mobile }
   end
 
   when_user_agent "Mozilla/5.0 (Macintosh; U; Intel Mac OS X 10_6_7; da-dk) AppleWebKit/533.21.1 (KHTML, like Gecko) Version/5.0.5 Safari/533.21.1" do
     specify { browser.vendor.should == :safari }
     specify { browser.version.should == 5 }
+    specify { browser.should_not be_mobile }
   end
 
   when_user_agent "Opera/9.80 (X11; Linux i686; U; ru) Presto/2.8.131 Version/11.11" do
     specify { browser.vendor.should == :opera }
     specify { browser.version.should == 11 }
+    specify { browser.should_not be_mobile }
   end
   
   when_user_agent "Opera/9.63 (X11; Linux x86_64; U; ru) Presto/2.1.1" do
     specify { browser.vendor.should == :opera }
     specify { browser.version.should == 9 }
+    specify { browser.should_not be_mobile }
+  end
+
+  when_user_agent "Mozilla/5.0 (Linux; U; Android 2.3.3; zh-tw; HTC_Pyramid Build/GRI40) AppleWebKit/533.1 (KHTML, like Gecko) Version/4.0 Mobile Safari/533.1" do
+    specify { browser.should be_mobile }
   end
 
   when_user_agent "Something Else" do
