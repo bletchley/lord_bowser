@@ -81,6 +81,8 @@ describe LordBowser do
 
   when_user_agent "Mozilla/5.0 (Linux; U; Android 2.3.3; zh-tw; HTC_Pyramid Build/GRI40) AppleWebKit/533.1 (KHTML, like Gecko) Version/4.0 Mobile Safari/533.1" do
     specify { browser.should be_mobile }
+    specify { browser.vendor.should == :safari }
+    specify { browser.version.should == 4 }
   end
 
   when_user_agent "Something Else" do

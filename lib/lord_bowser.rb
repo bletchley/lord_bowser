@@ -24,7 +24,7 @@ module LordBowser
       when /MSIE ([\w\.]+)/
         @vendor = :ie
         @version = $~[1].to_i
-      when /Version\/([\w\.]+) Safari/
+      when /Version\/([\w\.]+)(.*) Safari/
         @vendor = :safari
         @version = $~[1].to_i
       end
